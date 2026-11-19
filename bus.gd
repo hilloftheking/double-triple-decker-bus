@@ -6,8 +6,12 @@ extends RigidBody2D
 
 var stiffness := 50.0
 var damping := 5.0
+var jump_cd := 1.0
+var jump_timer := 0.0
 
 var prev_travels := {}
+
+var played_audio := false
 
 func _ready() -> void:
 	for cast: ShapeCast2D in [r_cast, l_cast]:
@@ -37,13 +41,25 @@ func _physics_process(delta: float) -> void:
 		prev_travels[cast] = travel
 	
 	if Input.is_action_pressed(&"ui_right"):
-		apply_central_force(transform.x * 500)
+		apply_central_force(transform.x * 700)
 	if Input.is_action_pressed(&"ui_left"):
-		apply_central_force(transform.x * -500)
+		apply_central_force(transform.x * -700)
 	
 	var travel_velocity := linear_velocity.project(transform.x)
 	var friction := (wheels_colliding / 2.0) * 0.7
 	apply_central_force(friction * (-travel_velocity))
+	
+	if jump_timer > 0.0:
+		jump_timer -= delta
+	
+	if wheels_colliding > 0:
+		if Input.is_action_just_pressed(&"ui_accept") and jump_timer <= 0.0:
+			jump_timer = jump_cd
+			apply_central_impulse(transform.y * -2000)
+	
+	if linear_velocity.y > 800 and not played_audio:
+		played_audio = true
+		$AudioStreamPlayer.play()
 
 
 var p := 0
