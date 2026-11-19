@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://bqhj7hgg8jobw"]
+
+[ext_resource type="Script" uid="uid://v7srl414x55d" path="res://bus.gd" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://dgqe5lv2j7yt0" path="res://bus_deck.tscn" id="2_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://3mmsd2q6243g" path="res://bus_stop.tscn" id="3_tlwt5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6hfmm"]
+radius = 32.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gf2bc"]
+size = Vector2(400, 120)
+
+[node name="World" type="Node2D" unique_id=1804432483]
+
+[node name="Bus" type="RigidBody2D" parent="." unique_id=1172997988]
+position = Vector2(371, 223)
+script = ExtResource("1_f3sb7")
+
+[node name="BusDeck" parent="Bus" unique_id=1405027137 instance=ExtResource("2_tlwt5")]
+
+[node name="RWheelCast" type="ShapeCast2D" parent="Bus" unique_id=1838396675]
+position = Vector2(90, 0)
+shape = SubResource("CircleShape2D_6hfmm")
+target_position = Vector2(0, 96)
+
+[node name="Wheel" type="Polygon2D" parent="Bus/RWheelCast" unique_id=437622451]
+position = Vector2(0, 96)
+scale = Vector2(64, 64)
+color = Color(0.11802005, 1.128967e-05, 0.11897265, 1)
+polygon = PackedVector2Array(-0.390625, -0.328125, 0, -0.5, 0.359375, -0.359375, 0.5, 0, 0.359375, 0.359375, 0, 0.5, -0.359375, 0.359375, -0.5, 0)
+
+[node name="LWheelCast" type="ShapeCast2D" parent="Bus" unique_id=973199027]
+position = Vector2(-90, 0)
+shape = SubResource("CircleShape2D_6hfmm")
+target_position = Vector2(0, 96)
+
+[node name="Wheel" type="Polygon2D" parent="Bus/LWheelCast" unique_id=1580606277]
+position = Vector2(0, 96)
+scale = Vector2(64, 64)
+color = Color(0.11802005, 1.128967e-05, 0.11897265, 1)
+polygon = PackedVector2Array(-0.390625, -0.328125, 0, -0.5, 0.359375, -0.359375, 0.5, 0, 0.359375, 0.359375, 0, 0.5, -0.359375, 0.359375, -0.5, 0)
+
+[node name="Camera2D" type="Camera2D" parent="Bus" unique_id=1307793003]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1864648154]
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D" unique_id=2067307700]
+color = Color(0.70980394, 0.76862746, 0.27058825, 1)
+polygon = PackedVector2Array(-87, 578, 64, 513, 260, 500, 514, 543, 783, 499, 1047, 515, 1296, 386, 1474, 202, 1751, 243, 2111, 335, 2160, 697, 1785, 770, 1334, 767, 985, 770, 532, 755, 144, 750, -106, 724)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1884872665]
+visible = false
+polygon = PackedVector2Array(-87, 578, 64, 513, 260, 500, 514, 543, 783, 499, 1047, 515, 1296, 386, 1474, 202, 1751, 243, 2111, 335, 2160, 697, 1785, 770, 1334, 767, 985, 770, 532, 755, 144, 750, -106, 724)
+
+[node name="BusStop" parent="." unique_id=1122005674 instance=ExtResource("3_tlwt5")]
+position = Vector2(967, 425)
+
+[node name="Boost" type="Area2D" parent="." unique_id=675368259]
+position = Vector2(1254, 311.00006)
+rotation = -0.7853982
+gravity_space_override = 1
+gravity_point_center = Vector2(1, 0)
+gravity_direction = Vector2(1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boost" unique_id=534145137]
+shape = SubResource("RectangleShape2D_gf2bc")
+
+[node name="Polygon2D" type="Polygon2D" parent="Boost" unique_id=1598122171]
+scale = Vector2(400, 120)
+color = Color(1, 1, 0.18039216, 0.30588236)
+polygon = PackedVector2Array(-0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5)
