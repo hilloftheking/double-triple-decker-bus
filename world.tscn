@@ -36,10 +36,6 @@ texture_repeat = 2
 position = Vector2(160, 120)
 texture = ExtResource("2_ioo17")
 
-[node name="Bus" parent="." unique_id=262830208 instance=ExtResource("1_aqk2v")]
-position = Vector2(136, 130)
-collision_layer = 2
-
 [node name="Level" type="StaticBody2D" parent="." unique_id=1864648154]
 script = ExtResource("3_pkg7o")
 
@@ -65,15 +61,19 @@ texture = ExtResource("5_ioo17")
 polygon = PackedVector2Array(559, 77, 647, 52, 731, 84, 696, 108, 609, 110)
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1308380810]
-position = Vector2(10, 31)
+position = Vector2(10, 29)
 polygon = PackedVector2Array(2649, 106, 2714, 102, 2713, 82, 2749, 102, 2722, 127, 2716, 112, 2649, 116)
 
 [node name="BusStop" parent="." unique_id=1122005674 instance=ExtResource("3_tlwt5")]
-position = Vector2(450, 130)
+position = Vector2(450, 118)
 is_grapple = true
 
 [node name="BusStop2" parent="." unique_id=248799241 instance=ExtResource("3_tlwt5")]
 position = Vector2(2556, 140)
+
+[node name="Bus" parent="." unique_id=262830208 instance=ExtResource("1_aqk2v")]
+position = Vector2(136, 130)
+collision_layer = 2
 
 [node name="Boost" type="Area2D" parent="." unique_id=675368259]
 position = Vector2(1325, -107)

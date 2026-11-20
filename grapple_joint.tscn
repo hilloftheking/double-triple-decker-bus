@@ -7,3 +7,4 @@
 script = ExtResource("1_62ihr")
 
 [node name="GrappleLine" parent="." unique_id=1549466813 instance=ExtResource("1_45lst")]
+color = Color(0.09411765, 0.16078432, 0.16078432, 1)
