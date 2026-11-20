@@ -6,6 +6,7 @@
 size = Vector2(120, 165)
 
 [node name="BusStop" type="Area2D" unique_id=1122005674]
+collision_mask = 2
 script = ExtResource("1_iqyef")
 
 [node name="Label" type="Label" parent="." unique_id=1778304880]

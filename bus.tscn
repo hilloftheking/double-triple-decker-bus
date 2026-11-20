@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://ekwoucq2pucu"]
+
+[ext_resource type="Script" uid="uid://v7srl414x55d" path="res://bus.gd" id="1_dvlo7"]
+[ext_resource type="PackedScene" uid="uid://dgqe5lv2j7yt0" path="res://bus_deck.tscn" id="2_4pi5y"]
+[ext_resource type="Texture2D" uid="uid://c7o06p012dkox" path="res://images/wheel.png" id="3_3osa5"]
+[ext_resource type="AudioStream" uid="uid://oof7l6pqv50r" path="res://audio/terror.wav" id="3_vfegb"]
+[ext_resource type="AudioStream" uid="uid://dim7k3a77unwk" path="res://audio/bus_stop.wav" id="5_uy1uj"]
+[ext_resource type="AudioStream" uid="uid://bidet5bvi0351" path="res://audio/hit.wav" id="6_4pi5y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6hfmm"]
+radius = 8.0
+
+[node name="Bus" type="RigidBody2D" unique_id=262830208]
+script = ExtResource("1_dvlo7")
+
+[node name="BusDeck" parent="." unique_id=1405027137 instance=ExtResource("2_4pi5y")]
+
+[node name="RWheelCast" type="ShapeCast2D" parent="." unique_id=940238592]
+position = Vector2(22, 0)
+shape = SubResource("CircleShape2D_6hfmm")
+target_position = Vector2(0, 24)
+
+[node name="Wheel" type="Sprite2D" parent="RWheelCast" unique_id=1787686607]
+position = Vector2(0, 24)
+texture = ExtResource("3_3osa5")
+
+[node name="LWheelCast" type="ShapeCast2D" parent="." unique_id=940524557]
+position = Vector2(-22, 0)
+shape = SubResource("CircleShape2D_6hfmm")
+target_position = Vector2(0, 24)
+
+[node name="Wheel" type="Sprite2D" parent="LWheelCast" unique_id=628726896]
+position = Vector2(0, 24)
+texture = ExtResource("3_3osa5")
+
+[node name="FallSoundPlayer" type="AudioStreamPlayer" parent="." unique_id=699475995]
+stream = ExtResource("3_vfegb")
+volume_db = -33.754
+bus = &"SFX"
+
+[node name="BusStopSoundPlayer" type="AudioStreamPlayer" parent="." unique_id=408025028]
+stream = ExtResource("5_uy1uj")
+volume_db = -3.649
+bus = &"SFX"
+
+[node name="HitSoundPlayer" type="AudioStreamPlayer" parent="." unique_id=1015876492]
+stream = ExtResource("6_4pi5y")
+volume_db = -20.982
+bus = &"SFX"

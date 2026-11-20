@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://co82x4awlqir1"]
+
+[ext_resource type="PackedScene" uid="uid://cwdqrgmq7py66" path="res://grapple_line.tscn" id="1_45lst"]
+[ext_resource type="Script" uid="uid://b70f8ecphtuxn" path="res://grapple_joint.gd" id="1_62ihr"]
+
+[node name="GrappleJoint" type="Node2D" unique_id=572661099]
+script = ExtResource("1_62ihr")
+
+[node name="GrappleLine" parent="." unique_id=1549466813 instance=ExtResource("1_45lst")]

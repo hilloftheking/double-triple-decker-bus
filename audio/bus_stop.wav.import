@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://oof7l6pqv50r"
-path="res://.godot/imported/terror.wav-d9568df6cddda499f6047bef05919dec.sample"
+uid="uid://dim7k3a77unwk"
+path="res://.godot/imported/bus_stop.wav-8b3ab0610af5024ac6129f7ef7bf725b.sample"
 
 [deps]
 
-source_file="res://terror.wav"
-dest_files=["res://.godot/imported/terror.wav-d9568df6cddda499f6047bef05919dec.sample"]
+source_file="res://audio/bus_stop.wav"
+dest_files=["res://.godot/imported/bus_stop.wav-8b3ab0610af5024ac6129f7ef7bf725b.sample"]
 
 [params]
 

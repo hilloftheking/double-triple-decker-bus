@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cwdqrgmq7py66"]
+
+[node name="GrappleLine" type="Polygon2D" unique_id=1549466813]
+scale = Vector2(4, 4)
+polygon = PackedVector2Array(-0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5)

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://d1sl8cgjrwl6g"]
+
+[ext_resource type="Texture2D" uid="uid://cs0muhjmanxcw" path="res://images/explosion.png" id="1_q7epf"]
+[ext_resource type="Script" uid="uid://b25vt6k457n4b" path="res://explosion.gd" id="2_j4sxf"]
+[ext_resource type="AudioStream" uid="uid://1kyuuyyi7b2y" path="res://audio/explosion.wav" id="2_vxas0"]
+
+[node name="Explosion" type="Sprite2D" unique_id=1683815976]
+texture = ExtResource("1_q7epf")
+script = ExtResource("2_j4sxf")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=895443048]
+stream = ExtResource("2_vxas0")
+volume_db = -17.399
+autoplay = true
+bus = &"SFX"

@@ -1,79 +1,86 @@
 [gd_scene format=3 uid="uid://bqhj7hgg8jobw"]
 
-[ext_resource type="Script" uid="uid://v7srl414x55d" path="res://bus.gd" id="1_f3sb7"]
-[ext_resource type="PackedScene" uid="uid://dgqe5lv2j7yt0" path="res://bus_deck.tscn" id="2_tlwt5"]
-[ext_resource type="AudioStream" uid="uid://oof7l6pqv50r" path="res://terror.wav" id="3_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://ekwoucq2pucu" path="res://bus.tscn" id="1_aqk2v"]
+[ext_resource type="Script" uid="uid://d0abemrqymd3i" path="res://world.gd" id="1_gbfbk"]
+[ext_resource type="Script" uid="uid://dnocj75yb06ue" path="res://follow_camera.gd" id="2_036b0"]
+[ext_resource type="Texture2D" uid="uid://c74amxpdjd25h" path="res://images/sky.png" id="2_ioo17"]
+[ext_resource type="Script" uid="uid://b0umo5iabpuqj" path="res://level.gd" id="3_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://3mmsd2q6243g" path="res://bus_stop.tscn" id="3_tlwt5"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_6hfmm"]
-radius = 32.0
+[ext_resource type="Script" uid="uid://710hnw4e36t6" path="res://boost.gd" id="5_036b0"]
+[ext_resource type="Texture2D" uid="uid://c8tshdhedvtjg" path="res://images/grass.png" id="5_ioo17"]
+[ext_resource type="Script" uid="uid://caoly23ux80na" path="res://moving_platform.gd" id="6_dwbse"]
+[ext_resource type="Script" uid="uid://dbuqnbj8ym27x" path="res://destroy_area.gd" id="10_wse8f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gf2bc"]
 size = Vector2(400, 120)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_036b0"]
+size = Vector2(150, 16)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6hfmm"]
+
 [node name="World" type="Node2D" unique_id=1804432483]
+script = ExtResource("1_gbfbk")
 
-[node name="Bus" type="RigidBody2D" parent="." unique_id=1172997988]
-position = Vector2(371, 223)
-script = ExtResource("1_f3sb7")
+[node name="FollowCamera" type="Camera2D" parent="." unique_id=1307793003 node_paths=PackedStringArray("bus")]
+position = Vector2(136, 105)
+script = ExtResource("2_036b0")
+bus = NodePath("../Bus")
 
-[node name="BusDeck" parent="Bus" unique_id=1405027137 instance=ExtResource("2_tlwt5")]
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1155496073]
+scroll_scale = Vector2(0.2, 0)
+repeat_size = Vector2(320, 0)
 
-[node name="RWheelCast" type="ShapeCast2D" parent="Bus" unique_id=1838396675]
-position = Vector2(90, 0)
-shape = SubResource("CircleShape2D_6hfmm")
-target_position = Vector2(0, 96)
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1980499239]
+texture_repeat = 2
+position = Vector2(160, 120)
+texture = ExtResource("2_ioo17")
 
-[node name="Wheel" type="Polygon2D" parent="Bus/RWheelCast" unique_id=437622451]
-position = Vector2(0, 96)
-scale = Vector2(64, 64)
-color = Color(0.11802005, 1.128967e-05, 0.11897265, 1)
-polygon = PackedVector2Array(-0.390625, -0.328125, 0, -0.5, 0.359375, -0.359375, 0.5, 0, 0.359375, 0.359375, 0, 0.5, -0.359375, 0.359375, -0.5, 0)
+[node name="Bus" parent="." unique_id=262830208 instance=ExtResource("1_aqk2v")]
+position = Vector2(136, 130)
+collision_layer = 2
 
-[node name="LWheelCast" type="ShapeCast2D" parent="Bus" unique_id=973199027]
-position = Vector2(-90, 0)
-shape = SubResource("CircleShape2D_6hfmm")
-target_position = Vector2(0, 96)
+[node name="Level" type="StaticBody2D" parent="." unique_id=1864648154]
+script = ExtResource("3_pkg7o")
 
-[node name="Wheel" type="Polygon2D" parent="Bus/LWheelCast" unique_id=1580606277]
-position = Vector2(0, 96)
-scale = Vector2(64, 64)
-color = Color(0.11802005, 1.128967e-05, 0.11897265, 1)
-polygon = PackedVector2Array(-0.390625, -0.328125, 0, -0.5, 0.359375, -0.359375, 0.5, 0, 0.359375, 0.359375, 0, 0.5, -0.359375, 0.359375, -0.5, 0)
+[node name="Polygon2D" type="Polygon2D" parent="Level" unique_id=2067307700]
+texture_repeat = 2
+texture = ExtResource("5_ioo17")
+polygon = PackedVector2Array(-18, 142, 12, 193, 90, 207, 201, 211, 364, 183, 525, 199, 674, 213, 790, 181, 958, 201, 998, 374, 712, 438, 423, 448, 130, 446, -71, 424, -168, 370, -301, 313, -303, -24, -272, -159, -52, -150, -44, -52, -35, 63)
 
-[node name="Camera2D" type="Camera2D" parent="Bus" unique_id=1307793003]
+[node name="Polygon2D2" type="Polygon2D" parent="Level" unique_id=1812411875]
+texture_repeat = 2
+texture = ExtResource("5_ioo17")
+polygon = PackedVector2Array(1322, 206, 1462, 190, 1731, 206, 1919, 227, 2139, 143, 2398, 173, 2718, 244, 2738, 458, 2416, 478, 1973, 512, 1677, 484, 1435, 445, 1313, 435, 1258, 323, 1270, 222)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Bus" unique_id=1297517839]
-stream = ExtResource("3_aqk2v")
+[node name="Polygon2D3" type="Polygon2D" parent="Level" unique_id=773399689]
+texture_repeat = 2
+texture = ExtResource("5_ioo17")
+polygon = PackedVector2Array(2898, 282, 3231, 249, 3640, 310, 3819, 280, 3986, 523, 3677, 585, 3292, 553, 3034, 503, 2881, 469, 2860, 389)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1864648154]
+[node name="Polygon2D4" type="Polygon2D" parent="Level" unique_id=82918079]
+texture_repeat = 2
+position = Vector2(0, -47)
+texture = ExtResource("5_ioo17")
+polygon = PackedVector2Array(559, 77, 647, 52, 731, 84, 696, 108, 609, 110)
 
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D" unique_id=2067307700]
-color = Color(0.70980394, 0.76862746, 0.27058825, 1)
-polygon = PackedVector2Array(-87, 578, 64, 513, 260, 500, 514, 543, 783, 499, 1047, 515, 1296, 386, 1474, 202, 1719, 162, 2048, 168, 2337, 212, 2503, 259, 2340, 758, 1785, 770, 1334, 767, 985, 770, 532, 755, 144, 750, -106, 724)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1884872665]
-visible = false
-polygon = PackedVector2Array(-87, 578, 64, 513, 260, 500, 514, 543, 783, 499, 1047, 515, 1296, 386, 1474, 202, 1719, 162, 2048, 168, 2337, 212, 2503, 259, 2340, 758, 1785, 770, 1334, 767, 985, 770, 532, 755, 144, 750, -106, 724)
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1308380810]
+position = Vector2(10, 31)
+polygon = PackedVector2Array(2649, 106, 2714, 102, 2713, 82, 2749, 102, 2722, 127, 2716, 112, 2649, 116)
 
 [node name="BusStop" parent="." unique_id=1122005674 instance=ExtResource("3_tlwt5")]
-position = Vector2(967, 425)
+position = Vector2(450, 130)
+is_grapple = true
 
-[node name="BusStop2" parent="." unique_id=1861209205 instance=ExtResource("3_tlwt5")]
-position = Vector2(823, 416)
-
-[node name="BusStop3" parent="." unique_id=1371720866 instance=ExtResource("3_tlwt5")]
-position = Vector2(1115, 407)
-
-[node name="BusStop4" parent="." unique_id=491317571 instance=ExtResource("3_tlwt5")]
-position = Vector2(660, 426)
+[node name="BusStop2" parent="." unique_id=248799241 instance=ExtResource("3_tlwt5")]
+position = Vector2(2556, 140)
 
 [node name="Boost" type="Area2D" parent="." unique_id=675368259]
-position = Vector2(1254, 311.00006)
-rotation = -0.7853982
+position = Vector2(1325, -107)
 gravity_space_override = 1
 gravity_point_center = Vector2(1, 0)
 gravity_direction = Vector2(1, 0)
+script = ExtResource("5_036b0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boost" unique_id=534145137]
 shape = SubResource("RectangleShape2D_gf2bc")
@@ -82,3 +89,29 @@ shape = SubResource("RectangleShape2D_gf2bc")
 scale = Vector2(400, 120)
 color = Color(1, 1, 0.18039216, 0.30588236)
 polygon = PackedVector2Array(-0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5)
+
+[node name="MovingPlatform" type="AnimatableBody2D" parent="." unique_id=2022878685 node_paths=PackedStringArray("target_node")]
+position = Vector2(989, 208)
+script = ExtResource("6_dwbse")
+target_node = NodePath("../PlatformTarget")
+move_time = 4.0
+
+[node name="Polygon2D" type="Polygon2D" parent="MovingPlatform" unique_id=1840079122]
+scale = Vector2(150, 16)
+polygon = PackedVector2Array(-0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform" unique_id=1183305903]
+shape = SubResource("RectangleShape2D_036b0")
+
+[node name="PlatformTarget" type="Node2D" parent="." unique_id=1475832599]
+position = Vector2(1344, 208)
+
+[node name="DestroyArea" type="Area2D" parent="." unique_id=1842668278]
+position = Vector2(320, 822)
+collision_mask = 2
+script = ExtResource("10_wse8f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea" unique_id=644921239]
+shape = SubResource("WorldBoundaryShape2D_6hfmm")
+
+[connection signal="body_entered" from="DestroyArea" to="DestroyArea" method="_on_body_entered"]
