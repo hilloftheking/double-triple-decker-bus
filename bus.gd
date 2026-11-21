@@ -13,6 +13,11 @@ var can_grapple := false
 var grapple_joint: Node2D = null
 var top_deck: Node2D = null
 
+var is_winning := false
+var remove_deck_timer := 0.8
+var num_decks := 0
+var fade_timer := 0.5
+
 var prev_travels := {}
 
 var played_audio := false
@@ -63,10 +68,17 @@ func _physics_process(delta: float) -> void:
 			jump_timer = jump_cd
 			apply_central_impulse(transform.y * -200)
 	
+	# When grappling, up and down keys also change grapple length
+	if grapple_joint:
+		if Input.is_action_pressed(&"ui_up"):
+			grapple_joint.length -= 60 * delta
+		if Input.is_action_pressed(&"ui_down"):
+			grapple_joint.length += 60 * delta
+	
 	if Input.is_action_pressed(&"ui_right"):
-		apply_torque(2000)
+		apply_torque(4000)
 	if Input.is_action_pressed(&"ui_left"):
-		apply_torque(-2000)
+		apply_torque(-4000)
 	
 	var travel_velocity := linear_velocity.project(transform.x)
 	var friction := (wheels_colliding / 2.0) * 0.7
@@ -90,21 +102,52 @@ func _physics_process(delta: float) -> void:
 	if can_grapple:
 		if Input.is_action_pressed(&"grapple"):
 			var params := PhysicsRayQueryParameters2D.new()
-			params.from = top_deck.global_position
+			params.from = top_deck.global_transform * Vector2(0, -6)
 			params.to = top_deck.global_transform * Vector2(0, -400)
 			var result := get_world_2d().direct_space_state.intersect_ray(params)
 			if result and not grapple_joint:
 				grapple_joint = preload("res://grapple_joint.tscn").instantiate()
 				grapple_joint.position = result["position"]
-				grapple_joint.setup(result["position"], top_deck.position, result["collider"], self)
+				var level_local = result["collider"].global_transform.inverse() * result["position"]
+				grapple_joint.setup(level_local, top_deck.position + Vector2(0, -6), result["collider"], self)
 				get_parent().add_child.call_deferred(grapple_joint)
 		elif grapple_joint:
-			grapple_joint.queue_free()
-			grapple_joint = null
+			clear_grapple()
+	
+	if is_winning:
+		if num_decks > 0:
+			remove_deck_timer -= delta
+			if remove_deck_timer <= 0.0:
+				remove_deck_timer += 0.2
+				num_decks -= 1
+				
+				var curr_top: Node = null
+				for child in get_children():
+					if child.is_in_group(&"deck"):
+						curr_top = child
+				curr_top.queue_free()
+				$RemoveDeckSoundPlayer.play()
+		else:
+			fade_timer -= delta
+			if fade_timer <= 0.0:
+				fade_timer = 10000
+				var t := create_tween()
+				t.tween_property($CanvasLayer/Dither, "alpha", 1.0, 1.0)
+
+
+func clear_grapple():
+	if grapple_joint:
+		grapple_joint.queue_free()
+		grapple_joint = null
 
 
 var p := 0
 func add_deck(bus_stop: Node2D, is_grapple := false) -> void:
+	clear_grapple()
+	
+	if can_grapple:
+		top_deck.get_node(^"GrappleThing").visible = false
+	
 	$BusStopSoundPlayer.play()
 	var deck := load("res://bus_deck.tscn").instantiate() as Node2D
 	if is_grapple:
@@ -118,6 +161,7 @@ func add_deck(bus_stop: Node2D, is_grapple := false) -> void:
 	last_bus_stop = bus_stop
 	can_grapple = is_grapple
 	top_deck = deck
+	num_decks += 1
 
 
 func reset_to_last_stop() -> void:
@@ -125,6 +169,8 @@ func reset_to_last_stop() -> void:
 
 
 func reset_to_specific_stop(stop: BusStop) -> void:
+	clear_grapple()
+	
 	var explosion := preload("res://explosion.tscn").instantiate() as Node2D
 	explosion.position = global_position
 	get_parent().add_child.call_deferred(explosion)
@@ -137,3 +183,10 @@ func reset_to_specific_stop(stop: BusStop) -> void:
 	linear_velocity = Vector2.ZERO
 	prev_lin_vel = Vector2.ZERO
 	angular_velocity = 0.0
+
+
+func victory() -> void:
+	$VictorySoundPlayer.play()
+	is_winning = true
+	linear_damp = 0.8
+	clear_grapple()

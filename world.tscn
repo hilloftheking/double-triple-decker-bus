@@ -9,17 +9,23 @@
 [ext_resource type="Script" uid="uid://710hnw4e36t6" path="res://boost.gd" id="5_036b0"]
 [ext_resource type="Texture2D" uid="uid://c8tshdhedvtjg" path="res://images/grass.png" id="5_ioo17"]
 [ext_resource type="Script" uid="uid://caoly23ux80na" path="res://moving_platform.gd" id="6_dwbse"]
+[ext_resource type="Texture2D" uid="uid://b2xkxpio2x5ba" path="res://images/platform.png" id="10_ic0uy"]
 [ext_resource type="Script" uid="uid://dbuqnbj8ym27x" path="res://destroy_area.gd" id="10_wse8f"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gf2bc"]
-size = Vector2(400, 120)
+[ext_resource type="Texture2D" uid="uid://m3ivtg5ui8k6" path="res://images/hotdogjimmys.png" id="12_k3n1d"]
+[ext_resource type="Script" uid="uid://c6xvgykbafcqm" path="res://goal.gd" id="13_2o6r5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_036b0"]
 size = Vector2(150, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gf2bc"]
+size = Vector2(400, 120)
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6hfmm"]
 
-[node name="World" type="Node2D" unique_id=1804432483]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6hfmm"]
+size = Vector2(122, 107)
+
+[node name="JimmyQuest" type="Node2D" unique_id=1804432483]
 script = ExtResource("1_gbfbk")
 
 [node name="FollowCamera" type="Camera2D" parent="." unique_id=1307793003 node_paths=PackedStringArray("bus")]
@@ -35,6 +41,18 @@ repeat_size = Vector2(320, 0)
 texture_repeat = 2
 position = Vector2(160, 120)
 texture = ExtResource("2_ioo17")
+
+[node name="MovingPlatform" type="AnimatableBody2D" parent="." unique_id=2022878685 node_paths=PackedStringArray("target_node")]
+position = Vector2(989, 208)
+script = ExtResource("6_dwbse")
+target_node = NodePath("../PlatformTarget")
+move_time = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform" unique_id=1183305903]
+shape = SubResource("RectangleShape2D_036b0")
+
+[node name="Sprite2D" type="Sprite2D" parent="MovingPlatform" unique_id=1812679296]
+texture = ExtResource("10_ic0uy")
 
 [node name="Level" type="StaticBody2D" parent="." unique_id=1864648154]
 script = ExtResource("3_pkg7o")
@@ -52,7 +70,7 @@ polygon = PackedVector2Array(1322, 206, 1462, 190, 1731, 206, 1919, 227, 2139, 1
 [node name="Polygon2D3" type="Polygon2D" parent="Level" unique_id=773399689]
 texture_repeat = 2
 texture = ExtResource("5_ioo17")
-polygon = PackedVector2Array(2898, 282, 3231, 249, 3640, 310, 3819, 280, 3986, 523, 3677, 585, 3292, 553, 3034, 503, 2881, 469, 2860, 389)
+polygon = PackedVector2Array(2898, 282, 3231, 249, 3462, 310, 3640, 310, 3819, 280, 3778, -256, 3945, -166, 3959, 303, 3986, 523, 3677, 585, 3292, 553, 3034, 503, 2881, 469, 2860, 389)
 
 [node name="Polygon2D4" type="Polygon2D" parent="Level" unique_id=82918079]
 texture_repeat = 2
@@ -70,6 +88,13 @@ is_grapple = true
 
 [node name="BusStop2" parent="." unique_id=248799241 instance=ExtResource("3_tlwt5")]
 position = Vector2(2556, 140)
+
+[node name="BusStop3" parent="." unique_id=1261847220 instance=ExtResource("3_tlwt5")]
+position = Vector2(3243, 164)
+
+[node name="HotDogJimmys" type="Sprite2D" parent="." unique_id=1450349694]
+position = Vector2(3551, 262)
+texture = ExtResource("12_k3n1d")
 
 [node name="Bus" parent="." unique_id=262830208 instance=ExtResource("1_aqk2v")]
 position = Vector2(136, 130)
@@ -90,19 +115,6 @@ scale = Vector2(400, 120)
 color = Color(1, 1, 0.18039216, 0.30588236)
 polygon = PackedVector2Array(-0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5)
 
-[node name="MovingPlatform" type="AnimatableBody2D" parent="." unique_id=2022878685 node_paths=PackedStringArray("target_node")]
-position = Vector2(989, 208)
-script = ExtResource("6_dwbse")
-target_node = NodePath("../PlatformTarget")
-move_time = 4.0
-
-[node name="Polygon2D" type="Polygon2D" parent="MovingPlatform" unique_id=1840079122]
-scale = Vector2(150, 16)
-polygon = PackedVector2Array(-0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform" unique_id=1183305903]
-shape = SubResource("RectangleShape2D_036b0")
-
 [node name="PlatformTarget" type="Node2D" parent="." unique_id=1475832599]
 position = Vector2(1344, 208)
 
@@ -113,5 +125,14 @@ script = ExtResource("10_wse8f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea" unique_id=644921239]
 shape = SubResource("WorldBoundaryShape2D_6hfmm")
+
+[node name="Goal" type="Area2D" parent="." unique_id=1932309518]
+position = Vector2(3551, 310)
+collision_mask = 2
+script = ExtResource("13_2o6r5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal" unique_id=1930530003]
+position = Vector2(1, -43.5)
+shape = SubResource("RectangleShape2D_6hfmm")
 
 [connection signal="body_entered" from="DestroyArea" to="DestroyArea" method="_on_body_entered"]

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cpkx1jo85y5j"]
+
+[ext_resource type="Shader" uid="uid://bd5q30fvusa2m" path="res://dither.gdshader" id="1_d4qa6"]
+[ext_resource type="Script" uid="uid://ci6wbm2djtyym" path="res://dither.gd" id="2_ia34y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d4qa6"]
+shader = ExtResource("1_d4qa6")
+shader_parameter/alpha = 0.0
+
+[node name="Dither" type="ColorRect" unique_id=955862363]
+material = SubResource("ShaderMaterial_d4qa6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("2_ia34y")

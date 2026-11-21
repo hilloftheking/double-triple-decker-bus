@@ -6,6 +6,9 @@
 [ext_resource type="AudioStream" uid="uid://oof7l6pqv50r" path="res://audio/terror.wav" id="3_vfegb"]
 [ext_resource type="AudioStream" uid="uid://dim7k3a77unwk" path="res://audio/bus_stop.wav" id="5_uy1uj"]
 [ext_resource type="AudioStream" uid="uid://bidet5bvi0351" path="res://audio/hit.wav" id="6_4pi5y"]
+[ext_resource type="AudioStream" uid="uid://bv4feff71ni88" path="res://audio/goal.wav" id="7_vfegb"]
+[ext_resource type="AudioStream" uid="uid://dcw6pqwnd0eek" path="res://audio/remove_deck.wav" id="8_3osa5"]
+[ext_resource type="PackedScene" uid="uid://cpkx1jo85y5j" path="res://dither.tscn" id="9_uy1uj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6hfmm"]
 radius = 8.0
@@ -40,10 +43,23 @@ bus = &"SFX"
 
 [node name="BusStopSoundPlayer" type="AudioStreamPlayer" parent="." unique_id=408025028]
 stream = ExtResource("5_uy1uj")
-volume_db = -3.649
+volume_db = -7.298
 bus = &"SFX"
 
 [node name="HitSoundPlayer" type="AudioStreamPlayer" parent="." unique_id=1015876492]
 stream = ExtResource("6_4pi5y")
 volume_db = -20.982
 bus = &"SFX"
+
+[node name="VictorySoundPlayer" type="AudioStreamPlayer" parent="." unique_id=51389079]
+stream = ExtResource("7_vfegb")
+volume_db = -1.825
+bus = &"SFX"
+
+[node name="RemoveDeckSoundPlayer" type="AudioStreamPlayer" parent="." unique_id=1882195249]
+stream = ExtResource("8_3osa5")
+volume_db = -8.21
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1179872747]
+
+[node name="Dither" parent="CanvasLayer" unique_id=955862363 instance=ExtResource("9_uy1uj")]
