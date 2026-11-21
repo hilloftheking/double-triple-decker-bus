@@ -15,6 +15,9 @@ func _ready() -> void:
 	await dialogue.advanced
 	bus.in_dialogue = false
 	
+	$Controls.visible = true
+	$Controls4.visible = true
+	
 	await bus.victory_achieved
 	bus.in_dialogue = true
 	dialogue.show_text("You did it")

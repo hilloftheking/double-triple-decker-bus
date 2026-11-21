@@ -4,27 +4,23 @@
 [ext_resource type="Script" uid="uid://d0abemrqymd3i" path="res://jimmy_quest.gd" id="1_gbfbk"]
 [ext_resource type="Script" uid="uid://dnocj75yb06ue" path="res://follow_camera.gd" id="2_036b0"]
 [ext_resource type="Texture2D" uid="uid://c74amxpdjd25h" path="res://images/sky.png" id="2_ioo17"]
-[ext_resource type="Script" uid="uid://b0umo5iabpuqj" path="res://level.gd" id="3_pkg7o"]
+[ext_resource type="Script" uid="uid://b0umo5iabpuqj" path="res://poly_collision.gd" id="3_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://3mmsd2q6243g" path="res://bus_stop.tscn" id="3_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://drle06pk8iqrx" path="res://moving_platform.tscn" id="4_70yo3"]
 [ext_resource type="Script" uid="uid://710hnw4e36t6" path="res://boost.gd" id="5_036b0"]
 [ext_resource type="Texture2D" uid="uid://c8tshdhedvtjg" path="res://images/grass.png" id="5_ioo17"]
-[ext_resource type="Script" uid="uid://caoly23ux80na" path="res://moving_platform.gd" id="6_dwbse"]
-[ext_resource type="Texture2D" uid="uid://b2xkxpio2x5ba" path="res://images/platform.png" id="10_ic0uy"]
 [ext_resource type="Script" uid="uid://dbuqnbj8ym27x" path="res://destroy_area.gd" id="10_wse8f"]
+[ext_resource type="Texture2D" uid="uid://dip0ax8noty6y" path="res://images/controls.png" id="11_cgjl0"]
+[ext_resource type="Texture2D" uid="uid://c3ek73t4enra3" path="res://images/controls2.png" id="11_yusk8"]
 [ext_resource type="Texture2D" uid="uid://m3ivtg5ui8k6" path="res://images/hotdogjimmys.png" id="12_k3n1d"]
+[ext_resource type="Texture2D" uid="uid://bw23sup0fswgm" path="res://images/controls3.png" id="12_yusk8"]
 [ext_resource type="Script" uid="uid://c6xvgykbafcqm" path="res://goal.gd" id="13_2o6r5"]
 [ext_resource type="PackedScene" uid="uid://bliej46u1plaf" path="res://dialogue.tscn" id="14_4j57t"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_036b0"]
-size = Vector2(150, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gf2bc"]
-size = Vector2(400, 120)
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6hfmm"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hfmm"]
 size = Vector2(122, 107)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6hfmm"]
 
 [node name="JimmyQuest" type="Node2D" unique_id=1804432483]
 script = ExtResource("1_gbfbk")
@@ -43,17 +39,33 @@ texture_repeat = 2
 position = Vector2(160, 120)
 texture = ExtResource("2_ioo17")
 
-[node name="MovingPlatform" type="AnimatableBody2D" parent="." unique_id=2022878685 node_paths=PackedStringArray("target_node")]
-position = Vector2(989, 208)
-script = ExtResource("6_dwbse")
+[node name="MovingPlatform" parent="." unique_id=1452291265 node_paths=PackedStringArray("target_node") instance=ExtResource("4_70yo3")]
+position = Vector2(2070, 195)
 target_node = NodePath("../PlatformTarget")
-move_time = 4.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform" unique_id=1183305903]
-shape = SubResource("RectangleShape2D_036b0")
+[node name="PlatformTarget" type="Node2D" parent="." unique_id=1475832599]
+position = Vector2(2070, -84)
 
-[node name="Sprite2D" type="Sprite2D" parent="MovingPlatform" unique_id=1812679296]
-texture = ExtResource("10_ic0uy")
+[node name="MovingPlatform2" parent="." unique_id=1278596718 node_paths=PackedStringArray("target_node") instance=ExtResource("4_70yo3")]
+position = Vector2(1290, -196)
+target_node = NodePath("../PlatformTarget2")
+
+[node name="PlatformTarget2" type="Node2D" parent="." unique_id=1017732467]
+position = Vector2(1043, -196)
+
+[node name="MovingPlatform3" parent="." unique_id=198448679 node_paths=PackedStringArray("target_node") instance=ExtResource("4_70yo3")]
+position = Vector2(-540, -770)
+target_node = NodePath("../PlatformTarget3")
+
+[node name="PlatformTarget3" type="Node2D" parent="." unique_id=1241811242]
+position = Vector2(-540, -1056)
+
+[node name="MovingPlatform4" parent="." unique_id=1289367026 node_paths=PackedStringArray("target_node") instance=ExtResource("4_70yo3")]
+position = Vector2(-242, -770)
+target_node = NodePath("../PlatformTarget4")
+
+[node name="PlatformTarget4" type="Node2D" parent="." unique_id=200432432]
+position = Vector2(-540, -770)
 
 [node name="Level" type="StaticBody2D" parent="." unique_id=1864648154]
 script = ExtResource("3_pkg7o")
@@ -61,80 +73,115 @@ script = ExtResource("3_pkg7o")
 [node name="Polygon2D" type="Polygon2D" parent="Level" unique_id=2067307700]
 texture_repeat = 2
 texture = ExtResource("5_ioo17")
-polygon = PackedVector2Array(-18, 142, 12, 193, 90, 207, 201, 211, 364, 183, 525, 199, 674, 213, 790, 181, 958, 201, 998, 374, 712, 438, 423, 448, 130, 446, -71, 424, -168, 370, -301, 313, -303, -24, -272, -159, -52, -150, -44, -52, -35, 63)
+polygon = PackedVector2Array(-18, 142, 12, 193, 90, 207, 201, 211, 364, 183, 525, 199, 674, 213, 790, 181, 958, 201, 954, 320, 978, 379, 1059, 393, 1084, 358, 1073, 193, 1160, 169, 1265, 156, 1402, 175, 1415, 361, 1510, 421, 1558, 404, 1579, 318, 1516, 174, 1648, 160, 1889, 173, 1984, 169, 2005, 193, 2018, 389, 1986, 445, 1859, 446, 1553, 525, 1431, 515, 1392, 522, 1073, 528, 712, 438, 423, 448, 130, 446, -71, 424, -168, 370, -301, 313, -303, -24, -272, -159, -52, -150, -44, -52, -35, 63)
 
-[node name="Polygon2D2" type="Polygon2D" parent="Level" unique_id=1812411875]
+[node name="Polygon2D2" type="Polygon2D" parent="Level" unique_id=109885062]
 texture_repeat = 2
+position = Vector2(22, 1)
 texture = ExtResource("5_ioo17")
-polygon = PackedVector2Array(1322, 206, 1462, 190, 1731, 206, 1919, 227, 2139, 143, 2398, 173, 2718, 244, 2738, 458, 2416, 478, 1973, 512, 1677, 484, 1435, 445, 1313, 435, 1258, 323, 1270, 222)
+polygon = PackedVector2Array(1968, -56, 1782, -103, 1497, -151, 1340, -156, 1324, -206, 1486, -210, 1758, -181, 1861, -143, 1943, -105, 1988, -87)
 
-[node name="Polygon2D3" type="Polygon2D" parent="Level" unique_id=773399689]
+[node name="Polygon2D3" type="Polygon2D" parent="Level" unique_id=375935370]
 texture_repeat = 2
+position = Vector2(22, 1)
 texture = ExtResource("5_ioo17")
-polygon = PackedVector2Array(2898, 282, 3231, 249, 3462, 310, 3640, 310, 3819, 280, 3778, -256, 3945, -166, 3959, 303, 3986, 523, 3677, 585, 3292, 553, 3034, 503, 2881, 469, 2860, 389)
+polygon = PackedVector2Array(1021, -195, 914, -211, 805, -219, 741, -252, 679, -315, 599, -397, 529, -467, 471, -517, 406, -541, 317, -568, 178, -580, 56, -589, -57, -590, -246, -598, -391, -590, -539, -591, -647, -604, -651, -702, -651, -754, -645, -804, -644, -834, -646, -892, -655, -1037, -678, -1072, -741, -1066, -772, -1005, -788, -879, -792, -651, -731, -481, -167, -460, 6, -481, 252, -479, 317, -423, 465, -396, 612, -297, 635, -205, 721, -162, 843, -160, 968, -149)
 
-[node name="Polygon2D4" type="Polygon2D" parent="Level" unique_id=82918079]
+[node name="Polygon2D4" type="Polygon2D" parent="Level" unique_id=94941209]
 texture_repeat = 2
-position = Vector2(0, -47)
+position = Vector2(22, 1)
 texture = ExtResource("5_ioo17")
-polygon = PackedVector2Array(559, 77, 647, 52, 731, 84, 696, 108, 609, 110)
-
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1308380810]
-position = Vector2(10, 29)
-polygon = PackedVector2Array(2649, 106, 2714, 102, 2713, 82, 2749, 102, 2722, 127, 2716, 112, 2649, 116)
+polygon = PackedVector2Array(-249, -771, -148, -780, -19, -807, 102, -801, 188, -802, 271, -809, 285, -1011, 300, -1107, 313, -914, 292, -792, 242, -776, 113, -768, 24, -772, -48, -772, -126, -764, -197, -764)
 
 [node name="BusStop" parent="." unique_id=1122005674 instance=ExtResource("3_tlwt5")]
 position = Vector2(450, 118)
+
+[node name="BusStop2" parent="." unique_id=972297877 instance=ExtResource("3_tlwt5")]
+position = Vector2(1794, 95)
+
+[node name="BusStop3" parent="." unique_id=845530682 instance=ExtResource("3_tlwt5")]
+position = Vector2(1436, -282)
+
+[node name="BusStop4" parent="." unique_id=1306403388 instance=ExtResource("3_tlwt5")]
+position = Vector2(-540, -667)
 is_grapple = true
 
-[node name="BusStop2" parent="." unique_id=248799241 instance=ExtResource("3_tlwt5")]
-position = Vector2(2556, 140)
-
-[node name="BusStop3" parent="." unique_id=1261847220 instance=ExtResource("3_tlwt5")]
-position = Vector2(3227, 181)
-
-[node name="HotDogJimmys" type="Sprite2D" parent="." unique_id=1450349694]
-position = Vector2(3551, 262)
-texture = ExtResource("12_k3n1d")
-
-[node name="Bus" parent="." unique_id=262830208 instance=ExtResource("1_aqk2v")]
-position = Vector2(136, 130)
-collision_layer = 2
-
-[node name="Boost" type="Area2D" parent="." unique_id=675368259]
-position = Vector2(1325, -107)
-gravity_space_override = 1
-gravity_point_center = Vector2(1, 0)
-gravity_direction = Vector2(1, 0)
-script = ExtResource("5_036b0")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boost" unique_id=534145137]
-shape = SubResource("RectangleShape2D_gf2bc")
-
-[node name="Polygon2D" type="Polygon2D" parent="Boost" unique_id=1598122171]
-scale = Vector2(400, 120)
-color = Color(1, 1, 0.18039216, 0.30588236)
-polygon = PackedVector2Array(-0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5)
-
-[node name="PlatformTarget" type="Node2D" parent="." unique_id=1475832599]
-position = Vector2(1344, 208)
-
-[node name="DestroyArea" type="Area2D" parent="." unique_id=1842668278]
-position = Vector2(320, 822)
-collision_mask = 2
-script = ExtResource("10_wse8f")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea" unique_id=644921239]
-shape = SubResource("WorldBoundaryShape2D_6hfmm")
-
 [node name="Goal" type="Area2D" parent="." unique_id=1932309518]
-position = Vector2(3551, 310)
+position = Vector2(194, -798)
 collision_mask = 2
 script = ExtResource("13_2o6r5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goal" unique_id=1930530003]
 position = Vector2(1, -43.5)
 shape = SubResource("RectangleShape2D_6hfmm")
+
+[node name="HotDogJimmys" type="Sprite2D" parent="Goal" unique_id=1450349694]
+position = Vector2(0, -48)
+texture = ExtResource("12_k3n1d")
+
+[node name="Controls" type="Sprite2D" parent="." unique_id=842254808]
+visible = false
+self_modulate = Color(0.85, 0.85, 0.71400005, 1)
+position = Vector2(216, 124)
+texture = ExtResource("11_cgjl0")
+
+[node name="Controls4" type="Sprite2D" parent="." unique_id=660331266]
+visible = false
+self_modulate = Color(0.85, 0.85, 0.71400005, 1)
+position = Vector2(196, 82)
+texture = ExtResource("11_yusk8")
+
+[node name="Controls2" type="Sprite2D" parent="." unique_id=248012522]
+self_modulate = Color(0.85, 0.85, 0.71400005, 1)
+position = Vector2(661, 148)
+texture = ExtResource("11_yusk8")
+
+[node name="Controls3" type="Sprite2D" parent="." unique_id=833041540]
+self_modulate = Color(0.85, 0.85, 0.71400005, 1)
+position = Vector2(-536, -681)
+texture = ExtResource("12_yusk8")
+
+[node name="Bus" parent="." unique_id=262830208 instance=ExtResource("1_aqk2v")]
+position = Vector2(136, 130)
+collision_layer = 2
+
+[node name="Boost" type="Area2D" parent="." unique_id=675368259]
+position = Vector2(595, -458)
+rotation = -2.4053218
+collision_mask = 2
+gravity_space_override = 1
+gravity_point_center = Vector2(1, 0)
+gravity_direction = Vector2(1, 0)
+gravity = 120.0
+script = ExtResource("5_036b0")
+
+[node name="Polygon2D" type="Polygon2D" parent="Boost" unique_id=1598122171]
+scale = Vector2(565.63275, 120)
+color = Color(1, 1, 0.18039216, 0.30588236)
+polygon = PackedVector2Array(-0.5, -0.5, 0.5, -0.5, 0.5, 0.007825375, 0.5, 0.5, -0.5, 0.5)
+
+[node name="Boost2" type="Area2D" parent="." unique_id=1048508781]
+position = Vector2(-68, -636)
+rotation = 3.1415927
+collision_mask = 2
+gravity_space_override = 1
+gravity_point_center = Vector2(1, 0)
+gravity_direction = Vector2(1, 0)
+gravity = 120.0
+script = ExtResource("5_036b0")
+
+[node name="Polygon2D" type="Polygon2D" parent="Boost2" unique_id=1591393676]
+scale = Vector2(565.63275, 120)
+color = Color(1, 1, 0.18039216, 0.30588236)
+polygon = PackedVector2Array(-0.5, -0.5, 0.5, -0.5, 0.5, 0.007825375, 0.5, 0.5, -0.5, 0.5)
+
+[node name="DestroyArea" type="Area2D" parent="." unique_id=1842668278]
+position = Vector2(320, 736)
+collision_mask = 2
+script = ExtResource("10_wse8f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea" unique_id=644921239]
+shape = SubResource("WorldBoundaryShape2D_6hfmm")
 
 [node name="Dialogue" parent="." unique_id=804119269 instance=ExtResource("14_4j57t")]
 

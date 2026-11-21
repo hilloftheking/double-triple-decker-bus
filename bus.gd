@@ -19,7 +19,7 @@ var is_winning := false
 var in_dialogue := false
 var remove_deck_timer := 0.8
 var num_decks := 0
-var fade_timer := 0.5
+var fade_timer := 1.0
 
 var prev_travels := {}
 
@@ -52,7 +52,7 @@ func _physics_process(delta: float) -> void:
 			if collider:
 				var platform_vel := PhysicsServer2D.body_get_state(collider.get_rid(), PhysicsServer2D.BODY_STATE_LINEAR_VELOCITY) as Vector2
 				if platform_vel:
-					apply_force(platform_vel * mass, cast.global_position - global_position)
+					apply_force(platform_vel * mass * 0.25, cast.global_position - global_position)
 		
 		var rest := cast.target_position.y
 		var prev_travel := prev_travels[cast] as float
