@@ -2,6 +2,8 @@ class_name Bus
 extends RigidBody2D
 
 
+signal victory_achieved
+
 @onready var r_cast: ShapeCast2D = $RWheelCast
 @onready var l_cast: ShapeCast2D = $LWheelCast
 
@@ -14,6 +16,7 @@ var grapple_joint: Node2D = null
 var top_deck: Node2D = null
 
 var is_winning := false
+var in_dialogue := false
 var remove_deck_timer := 0.8
 var num_decks := 0
 var fade_timer := 0.5
@@ -34,6 +37,12 @@ func _ready() -> void:
 
 var prev_lin_vel := Vector2.ZERO
 func _physics_process(delta: float) -> void:
+	if in_dialogue:
+		freeze = true
+		return
+	else:
+		freeze = false
+	
 	var wheels_colliding := 0
 	
 	for cast: ShapeCast2D in [r_cast, l_cast]:
@@ -58,27 +67,29 @@ func _physics_process(delta: float) -> void:
 		
 		prev_travels[cast] = travel
 	
-	if wheels_colliding > 0:
-		if Input.is_action_pressed(&"ui_up"):
-			apply_central_force(transform.x * 200)
-		if Input.is_action_pressed(&"ui_down"):
-			apply_central_force(transform.x * -200)
+	if not is_winning:
+		if wheels_colliding > 0:
+			if Input.is_action_pressed(&"ui_up"):
+				apply_central_force(transform.x * 200)
+			if Input.is_action_pressed(&"ui_down"):
+				apply_central_force(transform.x * -200)
+			
+			if Input.is_action_just_pressed(&"ui_accept") and jump_timer <= 0.0:
+				jump_timer = jump_cd
+				apply_central_impulse(transform.y * -200)
 		
-		if Input.is_action_just_pressed(&"ui_accept") and jump_timer <= 0.0:
-			jump_timer = jump_cd
-			apply_central_impulse(transform.y * -200)
-	
-	# When grappling, up and down keys also change grapple length
-	if grapple_joint:
-		if Input.is_action_pressed(&"ui_up"):
-			grapple_joint.length -= 60 * delta
-		if Input.is_action_pressed(&"ui_down"):
-			grapple_joint.length += 60 * delta
-	
-	if Input.is_action_pressed(&"ui_right"):
-		apply_torque(4000)
-	if Input.is_action_pressed(&"ui_left"):
-		apply_torque(-4000)
+		# When grappling, up and down keys also change grapple length
+		if grapple_joint:
+			if Input.is_action_pressed(&"ui_up"):
+				grapple_joint.length -= 90 * delta
+				grapple_joint.length = maxf(0.0, grapple_joint.length)
+			if Input.is_action_pressed(&"ui_down"):
+				grapple_joint.length += 90 * delta
+		
+		if Input.is_action_pressed(&"ui_right"):
+			apply_torque(4000)
+		if Input.is_action_pressed(&"ui_left"):
+			apply_torque(-4000)
 	
 	var travel_velocity := linear_velocity.project(transform.x)
 	var friction := (wheels_colliding / 2.0) * 0.7
@@ -96,10 +107,10 @@ func _physics_process(delta: float) -> void:
 		$HitSoundPlayer.play()
 	prev_lin_vel = linear_velocity
 	
-	if Input.is_action_just_pressed(&"reset"):
+	if Input.is_action_just_pressed(&"reset") and not is_winning:
 		reset_to_last_stop()
 	
-	if can_grapple:
+	if can_grapple and not is_winning:
 		if Input.is_action_pressed(&"grapple"):
 			var params := PhysicsRayQueryParameters2D.new()
 			params.from = top_deck.global_transform * Vector2(0, -6)
@@ -131,8 +142,7 @@ func _physics_process(delta: float) -> void:
 			fade_timer -= delta
 			if fade_timer <= 0.0:
 				fade_timer = 10000
-				var t := create_tween()
-				t.tween_property($CanvasLayer/Dither, "alpha", 1.0, 1.0)
+				victory_achieved.emit()
 
 
 func clear_grapple():
@@ -150,6 +160,8 @@ func add_deck(bus_stop: Node2D, is_grapple := false) -> void:
 	
 	$BusStopSoundPlayer.play()
 	var deck := load("res://bus_deck.tscn").instantiate() as Node2D
+	deck.get_node(^"Base").visible = false
+	deck.get_node(^"Deck").visible = true
 	if is_grapple:
 		deck.get_node(^"GrappleThing").visible = true
 	deck.position.y = p - 24
@@ -190,3 +202,23 @@ func victory() -> void:
 	is_winning = true
 	linear_damp = 0.8
 	clear_grapple()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not OS.is_debug_build():
+		return
+	
+	if event is InputEventKey and event.pressed:
+		if "1234567890".find(event.as_text_keycode()) != -1:
+			var num := (event.as_text_keycode() as String).to_int()
+			if num == 0:
+				num = 10
+			num -= 1
+			
+			var stops := []
+			for child in get_parent().get_children():
+				if child is BusStop:
+					stops.append(child)
+			
+			if num < stops.size():
+				reset_to_specific_stop(stops[num])

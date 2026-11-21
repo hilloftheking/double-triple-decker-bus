@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://drb8bdirtgkba" path="res://images/bus_base.png" id="1_3fbya"]
 [ext_resource type="Texture2D" uid="uid://dbf0nqx8rra2h" path="res://images/bus_grapple.png" id="2_7bnsy"]
+[ext_resource type="Texture2D" uid="uid://dw3w2doq6gwx4" path="res://images/bus_deck.png" id="2_gjnnl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hfmm"]
 size = Vector2(64, 24)
@@ -9,8 +10,12 @@ size = Vector2(64, 24)
 [node name="BusDeck" type="CollisionShape2D" unique_id=1405027137 groups=["deck"]]
 shape = SubResource("RectangleShape2D_6hfmm")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1673871249]
+[node name="Base" type="Sprite2D" parent="." unique_id=1673871249]
 texture = ExtResource("1_3fbya")
+
+[node name="Deck" type="Sprite2D" parent="." unique_id=468858704]
+visible = false
+texture = ExtResource("2_gjnnl")
 
 [node name="GrappleThing" type="Sprite2D" parent="." unique_id=2104339588]
 visible = false

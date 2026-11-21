@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bliej46u1plaf"]
+
+[ext_resource type="Script" uid="uid://br7gaisekmp7l" path="res://dialogue.gd" id="1_hoxo3"]
+[ext_resource type="Texture2D" uid="uid://bg4fals3dcoua" path="res://images/dialogue_bg.png" id="1_kp46k"]
+[ext_resource type="Texture2D" uid="uid://d0ui0g8jxj03y" path="res://images/dialogue_hotdog.png" id="2_758ep"]
+[ext_resource type="Shader" uid="uid://du62ibnvcexdr" path="res://dither_dialogue.gdshader" id="2_iq77p"]
+[ext_resource type="FontFile" uid="uid://dayjt4mcqn56g" path="res://Ranchers-Regular.ttf" id="3_hoxo3"]
+[ext_resource type="AudioStream" uid="uid://j2oins0f6dkr" path="res://audio/dialogue.wav" id="5_q2h7b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q2h7b"]
+shader = ExtResource("2_iq77p")
+shader_parameter/alpha = 0.0
+
+[node name="Dialogue" type="CanvasLayer" unique_id=1955269791]
+script = ExtResource("1_hoxo3")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=1791827959]
+material = SubResource("ShaderMaterial_q2h7b")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasGroup" unique_id=1425364249]
+offset_right = 320.0
+offset_bottom = 240.0
+texture = ExtResource("1_kp46k")
+
+[node name="Person" type="TextureRect" parent="CanvasGroup" unique_id=1749513745]
+offset_right = 320.0
+offset_bottom = 240.0
+texture = ExtResource("2_758ep")
+
+[node name="Label" type="Label" parent="CanvasGroup" unique_id=717522688]
+offset_left = 18.0
+offset_top = 151.0
+offset_right = 163.0
+offset_bottom = 228.0
+theme_override_fonts/font = ExtResource("3_hoxo3")
+autowrap_mode = 2
+visible_characters = 0
+visible_characters_behavior = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1746627396]
+stream = ExtResource("5_q2h7b")
+volume_db = -9.984

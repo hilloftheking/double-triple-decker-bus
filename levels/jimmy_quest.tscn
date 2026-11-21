@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bqhj7hgg8jobw"]
 
 [ext_resource type="PackedScene" uid="uid://ekwoucq2pucu" path="res://bus.tscn" id="1_aqk2v"]
-[ext_resource type="Script" uid="uid://d0abemrqymd3i" path="res://world.gd" id="1_gbfbk"]
+[ext_resource type="Script" uid="uid://d0abemrqymd3i" path="res://jimmy_quest.gd" id="1_gbfbk"]
 [ext_resource type="Script" uid="uid://dnocj75yb06ue" path="res://follow_camera.gd" id="2_036b0"]
 [ext_resource type="Texture2D" uid="uid://c74amxpdjd25h" path="res://images/sky.png" id="2_ioo17"]
 [ext_resource type="Script" uid="uid://b0umo5iabpuqj" path="res://level.gd" id="3_pkg7o"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://dbuqnbj8ym27x" path="res://destroy_area.gd" id="10_wse8f"]
 [ext_resource type="Texture2D" uid="uid://m3ivtg5ui8k6" path="res://images/hotdogjimmys.png" id="12_k3n1d"]
 [ext_resource type="Script" uid="uid://c6xvgykbafcqm" path="res://goal.gd" id="13_2o6r5"]
+[ext_resource type="PackedScene" uid="uid://bliej46u1plaf" path="res://dialogue.tscn" id="14_4j57t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_036b0"]
 size = Vector2(150, 16)
@@ -90,7 +91,7 @@ is_grapple = true
 position = Vector2(2556, 140)
 
 [node name="BusStop3" parent="." unique_id=1261847220 instance=ExtResource("3_tlwt5")]
-position = Vector2(3243, 164)
+position = Vector2(3227, 181)
 
 [node name="HotDogJimmys" type="Sprite2D" parent="." unique_id=1450349694]
 position = Vector2(3551, 262)
@@ -134,5 +135,7 @@ script = ExtResource("13_2o6r5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goal" unique_id=1930530003]
 position = Vector2(1, -43.5)
 shape = SubResource("RectangleShape2D_6hfmm")
+
+[node name="Dialogue" parent="." unique_id=804119269 instance=ExtResource("14_4j57t")]
 
 [connection signal="body_entered" from="DestroyArea" to="DestroyArea" method="_on_body_entered"]

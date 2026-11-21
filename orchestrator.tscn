@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://dk6mnnwev4tk4"]
+
+[ext_resource type="Script" uid="uid://ytyuw4u7xwao" path="res://orchestrator.gd" id="1_ufgif"]
+[ext_resource type="PackedScene" uid="uid://cpkx1jo85y5j" path="res://dither.tscn" id="2_qinh6"]
+[ext_resource type="Texture2D" uid="uid://dhl5lrhawmrh2" path="res://images/menu.png" id="3_0rxb5"]
+[ext_resource type="Texture2D" uid="uid://cvt14twsq4x3l" path="res://images/menu_button1.png" id="4_0g828"]
+
+[node name="Orchestrator" type="Node2D" unique_id=882260990]
+script = ExtResource("1_ufgif")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=207912908]
+
+[node name="Dither" parent="CanvasLayer" unique_id=955862363 instance=ExtResource("2_qinh6")]
+mouse_filter = 2
+
+[node name="LevelSelect" type="Control" parent="." unique_id=480474011]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 320.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="LevelSelect" unique_id=1880208367]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.62867945, 0.35618436, 0.5030618, 1)
+
+[node name="TextureRect" type="TextureRect" parent="LevelSelect" unique_id=1189213100]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 240.0
+texture = ExtResource("3_0rxb5")
+
+[node name="TextureRect2" type="TextureRect" parent="LevelSelect" unique_id=1073477151]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_0g828")
+
+[node name="HotdogJimmy" type="Button" parent="LevelSelect" unique_id=217384636]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 44.0
+offset_top = 112.0
+offset_right = 131.0
+offset_bottom = 188.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
