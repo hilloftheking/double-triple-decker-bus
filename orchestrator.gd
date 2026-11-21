@@ -5,9 +5,6 @@ var curr_level: Node = null
 
 
 func _ready() -> void:
-	#curr_level = load("res://levels/jimmy_quest.tscn").instantiate() as Node
-	#add_child.call_deferred(curr_level)
-	
 	$LevelSelect/HotdogJimmy.pressed.connect(start_level.bind("res://levels/jimmy_quest.tscn"))
 
 
@@ -39,3 +36,9 @@ func start_level(level_path: String) -> void:
 	await fade_dither(0.0)
 	
 	can_start_level = true
+
+
+func _physics_process(_delta: float) -> void:
+	if Input.is_action_just_pressed(&"mute"):
+		var music_idx := AudioServer.get_bus_index(&"Music")
+		AudioServer.set_bus_mute(music_idx, not AudioServer.is_bus_mute(music_idx))
