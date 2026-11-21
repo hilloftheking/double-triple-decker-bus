@@ -1,0 +1,262 @@
+[gd_scene format=3 uid="uid://uw15uiyya0ea"]
+
+[ext_resource type="Script" uid="uid://c7g1h61oqp28s" path="res://levels/volcano.gd" id="1_wpelj"]
+[ext_resource type="Script" uid="uid://dnocj75yb06ue" path="res://follow_camera.gd" id="2_rgmpb"]
+[ext_resource type="Texture2D" uid="uid://c74amxpdjd25h" path="res://images/sky.png" id="3_sbmyr"]
+[ext_resource type="PackedScene" uid="uid://ekwoucq2pucu" path="res://bus.tscn" id="4_4hcx5"]
+[ext_resource type="PackedScene" uid="uid://drle06pk8iqrx" path="res://moving_platform.tscn" id="4_7ermt"]
+[ext_resource type="Script" uid="uid://b0umo5iabpuqj" path="res://poly_collision.gd" id="4_247md"]
+[ext_resource type="Texture2D" uid="uid://b8sey3a5sjs6u" path="res://images/stone.png" id="5_247md"]
+[ext_resource type="PackedScene" uid="uid://6jv13lbpwn8c" path="res://destroy_area.tscn" id="7_2kfin"]
+[ext_resource type="PackedScene" uid="uid://3mmsd2q6243g" path="res://bus_stop.tscn" id="7_qxc14"]
+[ext_resource type="PackedScene" uid="uid://d0lc5ke8jcl4g" path="res://boost.tscn" id="8_fedah"]
+[ext_resource type="Texture2D" uid="uid://bw23sup0fswgm" path="res://images/controls3.png" id="8_sj671"]
+[ext_resource type="Script" uid="uid://c6xvgykbafcqm" path="res://goal.gd" id="9_ct4jk"]
+[ext_resource type="PackedScene" uid="uid://bliej46u1plaf" path="res://dialogue.tscn" id="9_k4k7m"]
+[ext_resource type="Texture2D" uid="uid://c51olklqnhncc" path="res://images/volcano.png" id="10_ct4jk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6hfmm"]
+size = Vector2(100, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k4k7m"]
+size = Vector2(141.25, 120)
+
+[node name="Volcano" type="Node2D" unique_id=1267237404]
+script = ExtResource("1_wpelj")
+
+[node name="FollowCamera" type="Camera2D" parent="." unique_id=227723605 node_paths=PackedStringArray("bus")]
+position = Vector2(107, 22)
+script = ExtResource("2_rgmpb")
+bus = NodePath("../Bus")
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=781340566]
+scroll_scale = Vector2(0.2, 0)
+repeat_size = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1958377232]
+self_modulate = Color(0.38, 0.4213333, 1, 1)
+texture_repeat = 2
+position = Vector2(160, 120)
+texture = ExtResource("3_sbmyr")
+
+[node name="MovingPlatform" parent="." unique_id=1452291265 node_paths=PackedStringArray("target_node") instance=ExtResource("4_7ermt")]
+position = Vector2(1511, 144)
+target_node = NodePath("../PlatformTarget")
+move_time = 4.0
+
+[node name="PlatformTarget" type="Node2D" parent="." unique_id=1152260288]
+position = Vector2(1511, -262)
+
+[node name="MovingPlatform2" parent="." unique_id=1979792932 node_paths=PackedStringArray("target_node") instance=ExtResource("4_7ermt")]
+position = Vector2(2949.0002, -257.99994)
+rotation = 1.6835898
+target_node = NodePath("../PlatformTarget2")
+move_time = 1.0
+
+[node name="PlatformTarget2" type="Node2D" parent="." unique_id=574806391]
+position = Vector2(3125, -248)
+
+[node name="MovingPlatform3" parent="." unique_id=829552409 node_paths=PackedStringArray("target_node") instance=ExtResource("4_7ermt")]
+position = Vector2(4749, -1392)
+rotation = 1.5707964
+scale = Vector2(0.99999994, 0.99999994)
+target_node = NodePath("../PlatformTarget3")
+move_time = 4.0
+
+[node name="PlatformTarget3" type="Node2D" parent="." unique_id=1984007816]
+position = Vector2(5235, -1414)
+
+[node name="MovingPlatform4" parent="." unique_id=1259092076 node_paths=PackedStringArray("target_node") instance=ExtResource("4_7ermt")]
+position = Vector2(6282, -1388)
+scale = Vector2(0.99999994, 0.99999994)
+target_node = NodePath("../PlatformTarget4")
+move_time = 4.0
+
+[node name="PlatformTarget4" type="Node2D" parent="." unique_id=1650824813]
+position = Vector2(6282, -1499)
+
+[node name="MovingPlatform5" parent="." unique_id=583949538 node_paths=PackedStringArray("target_node") instance=ExtResource("4_7ermt")]
+position = Vector2(6433, -1609)
+scale = Vector2(0.99999994, 0.99999994)
+target_node = NodePath("../PlatformTarget5")
+move_time = 4.0
+
+[node name="PlatformTarget5" type="Node2D" parent="." unique_id=446541731]
+position = Vector2(6433, -1500)
+
+[node name="MovingPlatform6" parent="." unique_id=2070141638 node_paths=PackedStringArray("target_node") instance=ExtResource("4_7ermt")]
+position = Vector2(6584, -1609)
+scale = Vector2(0.99999994, 0.99999994)
+target_node = NodePath("../PlatformTarget6")
+move_time = 4.0
+
+[node name="PlatformTarget6" type="Node2D" parent="." unique_id=2111773557]
+position = Vector2(6584, -1720)
+
+[node name="MovingPlatform7" parent="." unique_id=285043843 node_paths=PackedStringArray("target_node") instance=ExtResource("4_7ermt")]
+position = Vector2(6735, -1829)
+scale = Vector2(0.99999994, 0.99999994)
+target_node = NodePath("../PlatformTarget7")
+move_time = 4.0
+
+[node name="PlatformTarget7" type="Node2D" parent="." unique_id=1678324271]
+position = Vector2(6735, -1720)
+
+[node name="Level" type="StaticBody2D" parent="." unique_id=2031258719]
+script = ExtResource("4_247md")
+
+[node name="Polygon2D" type="Polygon2D" parent="Level" unique_id=454669267]
+texture_repeat = 2
+texture = ExtResource("5_247md")
+polygon = PackedVector2Array(29, 129, 103, 120, 271, 144, 324, 140, 395, 148, 477, 159, 551, 159, 650, 138, 610, 250, 553, 263, 430, 277, 269, 261, 117, 247, 43, 256, -22, 192, -4, 148)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Level" unique_id=313387474]
+texture_repeat = 2
+position = Vector2(302, -22)
+texture = ExtResource("5_247md")
+polygon = PackedVector2Array(721, 161, 793, 136, 902, 164, 1023, 160, 1126, 154, 1218, 175, 1296, 155, 1346, -207, 1428, -195, 1435, 279, 1203, 295, 1055, 350, 776, 314, 711, 266)
+
+[node name="Polygon2D3" type="Polygon2D" parent="Level" unique_id=442836340]
+texture_repeat = 2
+position = Vector2(302, -30)
+texture = ExtResource("5_247md")
+polygon = PackedVector2Array(404, 329, 434, 119, 443, 334)
+
+[node name="Polygon2D4" type="Polygon2D" parent="Level" unique_id=105396427]
+texture_repeat = 2
+position = Vector2(300, -70)
+texture = ExtResource("5_247md")
+polygon = PackedVector2Array(539, 328, 580, 325, 556, 125)
+
+[node name="Polygon2D5" type="Polygon2D" parent="Level" unique_id=474659086]
+texture_repeat = 2
+position = Vector2(300, -70)
+texture = ExtResource("5_247md")
+polygon = PackedVector2Array(631, 328, 671, 326, 642, 145)
+
+[node name="Polygon2D6" type="Polygon2D" parent="Level" unique_id=606589710]
+texture_repeat = 2
+position = Vector2(192, -42)
+texture = ExtResource("5_247md")
+polygon = PackedVector2Array(1660, -198, 2010, -219, 2357, -183, 2405, -348, 2549, -339, 2808, -323, 2769, -145, 2762, 13, 2641, 78, 2402, 102, 1976, 90, 1745, 105, 1585, 27, 1584, -129)
+
+[node name="Polygon2D7" type="Polygon2D" parent="Level" unique_id=2096090949]
+texture_repeat = 2
+position = Vector2(192, -42)
+texture = ExtResource("5_247md")
+polygon = PackedVector2Array(2309, -447, 2196, -474, 2240, -1230, 2291, -1416, 2333, -1558, 2416, -1730, 2550, -1720, 2785, -1667, 3046, -1903, 3516, -1798, 3569, -2400, 3876, -2450, 3919, -1752, 3940, -1433, 3736, -901, 3441, -598, 3190, -629, 2943, -600, 2806, -566, 2637, -441, 2504, -435, 2387, -434)
+
+[node name="Polygon2D8" type="Polygon2D" parent="Level" unique_id=997316148]
+texture_repeat = 2
+position = Vector2(192, -42)
+texture = ExtResource("5_247md")
+polygon = PackedVector2Array(2936, -417, 3082, -429, 3254, -433, 3375, -430, 3455, -440, 3655, -617, 3814, -777, 3986, -1192, 4042, -1363, 4122, -1405, 4604, -1443, 4287, -1350, 4107, -705, 4004, -181, 3423, 9, 3224, 60, 2932, 7, 2912, -168)
+
+[node name="Polygon2D9" type="Polygon2D" parent="Level" unique_id=1096701180]
+texture_repeat = 2
+position = Vector2(1484, -434)
+texture = ExtResource("5_247md")
+polygon = PackedVector2Array(3200, -877, 3703, -919, 3876, -941, 3923, -842, 3944, -701, 3921, -607, 3839, -560, 3356, -538)
+
+[node name="Polygon2D10" type="Polygon2D" parent="Level" unique_id=1937235020]
+texture_repeat = 2
+position = Vector2(2349, -489)
+texture = ExtResource("5_247md")
+polygon = PackedVector2Array(3211, -900, 3414, -912, 3870, -914, 3903, -843, 3924, -698, 3903, -606, 3788, -555, 3244, -533, 3211, -718)
+
+[node name="Polygon2D11" type="Polygon2D" parent="Level" unique_id=348168240]
+texture_repeat = 2
+position = Vector2(2349, -489)
+texture = ExtResource("5_247md")
+polygon = PackedVector2Array(3478, -1055, 3624, -1058, 3806, -1111, 3835, -1222, 3811, -2041, 3729, -1383, 3644, -1382, 3453, -1391, 3345, -2009, 3275, -2061, 3266, -1275, 3347, -1136, 3413, -1073)
+
+[node name="Polygon2D12" type="Polygon2D" parent="Level" unique_id=1074054700]
+texture_repeat = 2
+position = Vector2(2338, -494)
+texture = ExtResource("5_247md")
+polygon = PackedVector2Array(4477, -1338, 4470, -901, 4442, -719, 4419, -595, 4611, -527, 5047, -506, 5259, -706, 5197, -1038, 5359, -1221, 5469, -1339, 5263, -1330, 5038, -1352, 4798, -1349, 4601, -1349)
+
+[node name="Polygon2D13" type="Polygon2D" parent="Level" unique_id=73950963]
+texture_repeat = 2
+position = Vector2(2338, -494)
+texture = ExtResource("5_247md")
+polygon = PackedVector2Array(5522, -1314, 5534, -1340, 5604, -1341, 5628, -1322, 5604, -1305)
+
+[node name="Polygon2D14" type="Polygon2D" parent="Level" unique_id=201985120]
+texture_repeat = 2
+position = Vector2(2298, -496)
+texture = ExtResource("5_247md")
+polygon = PackedVector2Array(5716, -1341, 5775, -1363, 5847, -1346, 5818, -1314, 5724, -1317)
+
+[node name="Polygon2D15" type="Polygon2D" parent="Level" unique_id=569539137]
+texture_repeat = 2
+position = Vector2(2298, -496)
+texture = ExtResource("5_247md")
+polygon = PackedVector2Array(5925, -1340, 6097, -1377, 6439, -1344, 6595, -1341, 6867, -1397, 6945, -1405, 7229, -1382, 7314, -1443, 7203, -1127, 6918, -1096, 6525, -1024, 6000, -1044, 5902, -1253)
+
+[node name="BusStop" parent="." unique_id=1122005674 instance=ExtResource("7_qxc14")]
+position = Vector2(2240, -332)
+is_grapple = true
+
+[node name="BusStop2" parent="." unique_id=1100721234 instance=ExtResource("7_qxc14")]
+position = Vector2(5888, -1476)
+
+[node name="BusStop3" parent="." unique_id=654977977 instance=ExtResource("7_qxc14")]
+position = Vector2(7117, -1920)
+
+[node name="BusStop4" parent="." unique_id=648804958 instance=ExtResource("7_qxc14")]
+position = Vector2(7191, -1921)
+
+[node name="BusStop5" parent="." unique_id=1000429385 instance=ExtResource("7_qxc14")]
+position = Vector2(7263, -1921)
+
+[node name="Controls" type="Sprite2D" parent="." unique_id=719412248]
+self_modulate = Color(0.85, 0.85, 0.71400005, 1)
+position = Vector2(2368, -392)
+texture = ExtResource("8_sj671")
+
+[node name="Goal" type="Area2D" parent="." unique_id=1286452650]
+position = Vector2(9390, -1918)
+collision_mask = 2
+script = ExtResource("9_ct4jk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal" unique_id=1540063640]
+shape = SubResource("RectangleShape2D_6hfmm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Goal" unique_id=1118118977]
+texture = ExtResource("10_ct4jk")
+
+[node name="Bus" parent="." unique_id=262830208 instance=ExtResource("4_4hcx5")]
+position = Vector2(107, 51)
+
+[node name="DestroyArea" parent="." unique_id=1979535052 instance=ExtResource("7_2kfin")]
+position = Vector2(105, 440)
+
+[node name="Boost" parent="." unique_id=1543617609 instance=ExtResource("8_fedah")]
+position = Vector2(568, 93)
+rotation = -0.20633954
+gravity = 180.0
+
+[node name="Polygon2D" parent="Boost" index="0" unique_id=338507978]
+polygon = PackedVector2Array(-70.625, -60, 70.625, -60, 70.625, 60, -70.625, 60)
+uv = PackedVector2Array(-11.753387, 0.5924569, 129.49661, 0.5924569, 129.49661, 120.59246, -11.753387, 120.59246)
+
+[node name="CollisionShape2D" parent="Boost" index="1" unique_id=1351476318]
+shape = SubResource("RectangleShape2D_k4k7m")
+
+[node name="Boost2" parent="." unique_id=1021484753 instance=ExtResource("8_fedah")]
+position = Vector2(1755, -321)
+
+[node name="Boost3" parent="." unique_id=1331416181 instance=ExtResource("8_fedah")]
+position = Vector2(3812.0002, -715.9999)
+rotation = -0.7887578
+gravity = 240.0
+
+[node name="Boost4" parent="." unique_id=1847491093 instance=ExtResource("8_fedah")]
+position = Vector2(4089.0002, -1178.0001)
+rotation = -1.2286104
+gravity = 240.0
+
+[node name="Dialogue" parent="." unique_id=1955269791 instance=ExtResource("9_k4k7m")]
+
+[editable path="Boost"]

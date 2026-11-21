@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://6jv13lbpwn8c"]
+
+[ext_resource type="Script" uid="uid://dbuqnbj8ym27x" path="res://destroy_area.gd" id="1_soird"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6hfmm"]
+
+[node name="DestroyArea" type="Area2D" unique_id=1979535052]
+collision_mask = 2
+script = ExtResource("1_soird")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1899112097]
+shape = SubResource("WorldBoundaryShape2D_6hfmm")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

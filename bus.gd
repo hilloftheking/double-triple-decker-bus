@@ -9,7 +9,7 @@ signal victory_achieved
 
 var stiffness := 50.0
 var damping := 5.0
-var jump_cd := 1.0
+var jump_cd := 0.5
 var jump_timer := 0.0
 var can_grapple := false
 var grapple_joint: Node2D = null
@@ -22,8 +22,6 @@ var num_decks := 0
 var fade_timer := 1.0
 
 var prev_travels := {}
-
-var played_audio := false
 
 @onready var start_pos := global_position
 var last_bus_stop: Node2D = null
@@ -97,10 +95,6 @@ func _physics_process(delta: float) -> void:
 	
 	if jump_timer > 0.0:
 		jump_timer -= delta
-	
-	if linear_velocity.y > 300 and not played_audio:
-		played_audio = true
-		$FallSoundPlayer.play()
 	
 	if (linear_velocity - prev_lin_vel).length() > 100.0:
 		$HitSoundPlayer.pitch_scale = randf_range(0.8, 1.2)
@@ -221,4 +215,5 @@ func _unhandled_input(event: InputEvent) -> void:
 					stops.append(child)
 			
 			if num < stops.size():
+				await get_tree().physics_frame
 				reset_to_specific_stop(stops[num])

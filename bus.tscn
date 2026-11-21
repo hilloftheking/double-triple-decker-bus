@@ -13,6 +13,7 @@
 radius = 8.0
 
 [node name="Bus" type="RigidBody2D" unique_id=262830208]
+collision_layer = 2
 script = ExtResource("1_dvlo7")
 
 [node name="BusDeck" parent="." unique_id=1405027137 instance=ExtResource("2_4pi5y")]

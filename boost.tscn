@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://d0lc5ke8jcl4g"]
+
+[ext_resource type="Script" uid="uid://710hnw4e36t6" path="res://boost.gd" id="1_n25d2"]
+[ext_resource type="Texture2D" uid="uid://c24siwevdqp1p" path="res://images/boost.png" id="2_0koi6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m57vs"]
+size = Vector2(565, 120)
+
+[node name="Boost" type="Area2D" unique_id=1543617609]
+collision_mask = 2
+gravity_space_override = 1
+gravity_point_center = Vector2(1, 0)
+gravity_direction = Vector2(1, 0)
+gravity = 120.0
+script = ExtResource("1_n25d2")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=338507978]
+texture_repeat = 2
+texture = ExtResource("2_0koi6")
+polygon = PackedVector2Array(-282.5, -60, 282.5, -60, 282.5, 60, -282.5, 60)
+uv = PackedVector2Array(-280.88623, 0.008767724, 284.11377, 0.008767724, 284.11377, 120.00877, -280.88623, 120.00877)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1351476318]
+shape = SubResource("RectangleShape2D_m57vs")

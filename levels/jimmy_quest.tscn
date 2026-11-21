@@ -1,26 +1,24 @@
 [gd_scene format=3 uid="uid://bqhj7hgg8jobw"]
 
 [ext_resource type="PackedScene" uid="uid://ekwoucq2pucu" path="res://bus.tscn" id="1_aqk2v"]
-[ext_resource type="Script" uid="uid://d0abemrqymd3i" path="res://jimmy_quest.gd" id="1_gbfbk"]
+[ext_resource type="Script" uid="uid://d0abemrqymd3i" path="res://levels/jimmy_quest.gd" id="1_gbfbk"]
 [ext_resource type="Script" uid="uid://dnocj75yb06ue" path="res://follow_camera.gd" id="2_036b0"]
 [ext_resource type="Texture2D" uid="uid://c74amxpdjd25h" path="res://images/sky.png" id="2_ioo17"]
 [ext_resource type="Script" uid="uid://b0umo5iabpuqj" path="res://poly_collision.gd" id="3_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://3mmsd2q6243g" path="res://bus_stop.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://drle06pk8iqrx" path="res://moving_platform.tscn" id="4_70yo3"]
-[ext_resource type="Script" uid="uid://710hnw4e36t6" path="res://boost.gd" id="5_036b0"]
 [ext_resource type="Texture2D" uid="uid://c8tshdhedvtjg" path="res://images/grass.png" id="5_ioo17"]
-[ext_resource type="Script" uid="uid://dbuqnbj8ym27x" path="res://destroy_area.gd" id="10_wse8f"]
 [ext_resource type="Texture2D" uid="uid://dip0ax8noty6y" path="res://images/controls.png" id="11_cgjl0"]
 [ext_resource type="Texture2D" uid="uid://c3ek73t4enra3" path="res://images/controls2.png" id="11_yusk8"]
 [ext_resource type="Texture2D" uid="uid://m3ivtg5ui8k6" path="res://images/hotdogjimmys.png" id="12_k3n1d"]
 [ext_resource type="Texture2D" uid="uid://bw23sup0fswgm" path="res://images/controls3.png" id="12_yusk8"]
 [ext_resource type="Script" uid="uid://c6xvgykbafcqm" path="res://goal.gd" id="13_2o6r5"]
 [ext_resource type="PackedScene" uid="uid://bliej46u1plaf" path="res://dialogue.tscn" id="14_4j57t"]
+[ext_resource type="PackedScene" uid="uid://d0lc5ke8jcl4g" path="res://boost.tscn" id="14_gy5hi"]
+[ext_resource type="PackedScene" uid="uid://6jv13lbpwn8c" path="res://destroy_area.tscn" id="15_yusk8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hfmm"]
 size = Vector2(122, 107)
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6hfmm"]
 
 [node name="JimmyQuest" type="Node2D" unique_id=1804432483]
 script = ExtResource("1_gbfbk")
@@ -136,6 +134,16 @@ self_modulate = Color(0.85, 0.85, 0.71400005, 1)
 position = Vector2(661, 148)
 texture = ExtResource("11_yusk8")
 
+[node name="Controls5" type="Sprite2D" parent="." unique_id=1910944230]
+self_modulate = Color(0.85, 0.85, 0.71400005, 1)
+position = Vector2(1022, 347)
+texture = ExtResource("11_yusk8")
+
+[node name="Controls6" type="Sprite2D" parent="." unique_id=840157164]
+self_modulate = Color(0.85, 0.85, 0.71400005, 1)
+position = Vector2(1508, 371)
+texture = ExtResource("11_yusk8")
+
 [node name="Controls3" type="Sprite2D" parent="." unique_id=833041540]
 self_modulate = Color(0.85, 0.85, 0.71400005, 1)
 position = Vector2(-536, -681)
@@ -143,46 +151,16 @@ texture = ExtResource("12_yusk8")
 
 [node name="Bus" parent="." unique_id=262830208 instance=ExtResource("1_aqk2v")]
 position = Vector2(136, 130)
-collision_layer = 2
 
-[node name="Boost" type="Area2D" parent="." unique_id=675368259]
+[node name="Boost" parent="." unique_id=1543617609 instance=ExtResource("14_gy5hi")]
 position = Vector2(595, -458)
 rotation = -2.4053218
-collision_mask = 2
-gravity_space_override = 1
-gravity_point_center = Vector2(1, 0)
-gravity_direction = Vector2(1, 0)
-gravity = 120.0
-script = ExtResource("5_036b0")
 
-[node name="Polygon2D" type="Polygon2D" parent="Boost" unique_id=1598122171]
-scale = Vector2(565.63275, 120)
-color = Color(1, 1, 0.18039216, 0.30588236)
-polygon = PackedVector2Array(-0.5, -0.5, 0.5, -0.5, 0.5, 0.007825375, 0.5, 0.5, -0.5, 0.5)
-
-[node name="Boost2" type="Area2D" parent="." unique_id=1048508781]
+[node name="Boost2" parent="." unique_id=512301316 instance=ExtResource("14_gy5hi")]
 position = Vector2(-68, -636)
 rotation = 3.1415927
-collision_mask = 2
-gravity_space_override = 1
-gravity_point_center = Vector2(1, 0)
-gravity_direction = Vector2(1, 0)
-gravity = 120.0
-script = ExtResource("5_036b0")
 
-[node name="Polygon2D" type="Polygon2D" parent="Boost2" unique_id=1591393676]
-scale = Vector2(565.63275, 120)
-color = Color(1, 1, 0.18039216, 0.30588236)
-polygon = PackedVector2Array(-0.5, -0.5, 0.5, -0.5, 0.5, 0.007825375, 0.5, 0.5, -0.5, 0.5)
-
-[node name="DestroyArea" type="Area2D" parent="." unique_id=1842668278]
+[node name="DestroyArea" parent="." unique_id=1979535052 instance=ExtResource("15_yusk8")]
 position = Vector2(320, 736)
-collision_mask = 2
-script = ExtResource("10_wse8f")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea" unique_id=644921239]
-shape = SubResource("WorldBoundaryShape2D_6hfmm")
 
 [node name="Dialogue" parent="." unique_id=804119269 instance=ExtResource("14_4j57t")]
-
-[connection signal="body_entered" from="DestroyArea" to="DestroyArea" method="_on_body_entered"]

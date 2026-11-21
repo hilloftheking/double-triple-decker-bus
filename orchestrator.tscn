@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cpkx1jo85y5j" path="res://dither.tscn" id="2_qinh6"]
 [ext_resource type="Texture2D" uid="uid://dhl5lrhawmrh2" path="res://images/menu.png" id="3_0rxb5"]
 [ext_resource type="Texture2D" uid="uid://cvt14twsq4x3l" path="res://images/menu_button1.png" id="4_0g828"]
+[ext_resource type="Texture2D" uid="uid://kbqsgdsvqhw0" path="res://images/menu_button2.png" id="5_2yd10"]
 [ext_resource type="AudioStream" uid="uid://drxie1mlafjb2" path="res://audio/beautiful music.wav" id="5_p7jbj"]
 
 [node name="Orchestrator" type="Node2D" unique_id=882260990]
@@ -45,6 +46,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("4_0g828")
 
+[node name="TextureRect3" type="TextureRect" parent="LevelSelect" unique_id=288932656]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_2yd10")
+
 [node name="HotdogJimmy" type="Button" parent="LevelSelect" unique_id=217384636]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
@@ -52,6 +59,16 @@ offset_left = 44.0
 offset_top = 112.0
 offset_right = 131.0
 offset_bottom = 188.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="Volcano" type="Button" parent="LevelSelect" unique_id=1010028721]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 147.0
+offset_top = 109.0
+offset_right = 213.0
+offset_bottom = 179.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 
