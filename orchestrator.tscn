@@ -32,7 +32,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.62867945, 0.35618436, 0.5030618, 1)
+color = Color(0.627451, 0.35686275, 0.5019608, 1)
 
 [node name="TextureRect" type="TextureRect" parent="LevelSelect" unique_id=1189213100]
 layout_mode = 0

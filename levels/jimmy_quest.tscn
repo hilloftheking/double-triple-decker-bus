@@ -134,6 +134,14 @@ self_modulate = Color(0.85, 0.85, 0.71400005, 1)
 position = Vector2(661, 148)
 texture = ExtResource("11_yusk8")
 
+[node name="Controls3" type="Sprite2D" parent="." unique_id=833041540]
+self_modulate = Color(0.85, 0.85, 0.71400005, 1)
+position = Vector2(-536, -681)
+texture = ExtResource("12_yusk8")
+
+[node name="Bus" parent="." unique_id=262830208 instance=ExtResource("1_aqk2v")]
+position = Vector2(136, 130)
+
 [node name="Controls5" type="Sprite2D" parent="." unique_id=1910944230]
 self_modulate = Color(0.85, 0.85, 0.71400005, 1)
 position = Vector2(1022, 347)
@@ -143,14 +151,6 @@ texture = ExtResource("11_yusk8")
 self_modulate = Color(0.85, 0.85, 0.71400005, 1)
 position = Vector2(1508, 371)
 texture = ExtResource("11_yusk8")
-
-[node name="Controls3" type="Sprite2D" parent="." unique_id=833041540]
-self_modulate = Color(0.85, 0.85, 0.71400005, 1)
-position = Vector2(-536, -681)
-texture = ExtResource("12_yusk8")
-
-[node name="Bus" parent="." unique_id=262830208 instance=ExtResource("1_aqk2v")]
-position = Vector2(136, 130)
 
 [node name="Boost" parent="." unique_id=1543617609 instance=ExtResource("14_gy5hi")]
 position = Vector2(595, -458)

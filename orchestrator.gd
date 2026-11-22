@@ -24,6 +24,7 @@ func finish_level() -> void:
 	curr_level = null
 	$LevelSelect.visible = true
 	fade_dither(0.0)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
 var can_start_level := true
@@ -31,6 +32,8 @@ func start_level(level_path: String) -> void:
 	if not can_start_level:
 		return
 	can_start_level = false
+	
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	
 	await fade_dither(1.0)
 	curr_level = load(level_path).instantiate()
@@ -53,3 +56,8 @@ func _physics_process(_delta: float) -> void:
 		AudioServer.set_bus_mute(music_idx, not AudioServer.is_bus_mute(music_idx))
 	if Input.is_action_just_pressed(&"unlock_level"):
 		unlock_level(true)
+	if Input.is_action_just_pressed(&"fullscreen"):
+		if get_window().mode == Window.MODE_FULLSCREEN:
+			get_window().mode = Window.MODE_WINDOWED
+		else:
+			get_window().mode = Window.MODE_FULLSCREEN

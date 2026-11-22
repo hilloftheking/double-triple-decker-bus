@@ -14,6 +14,8 @@
 [ext_resource type="Script" uid="uid://c6xvgykbafcqm" path="res://goal.gd" id="9_ct4jk"]
 [ext_resource type="PackedScene" uid="uid://bliej46u1plaf" path="res://dialogue.tscn" id="9_k4k7m"]
 [ext_resource type="Texture2D" uid="uid://c51olklqnhncc" path="res://images/volcano.png" id="10_ct4jk"]
+[ext_resource type="Texture2D" uid="uid://de130umqt8q3m" path="res://images/goodjob.png" id="10_w7e3s"]
+[ext_resource type="Texture2D" uid="uid://c0h55fmolj354" path="res://images/domer.png" id="15_fnxl5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hfmm"]
 size = Vector2(100, 80)
@@ -214,6 +216,14 @@ position = Vector2(7263, -1921)
 self_modulate = Color(0.85, 0.85, 0.71400005, 1)
 position = Vector2(2368, -392)
 texture = ExtResource("8_sj671")
+
+[node name="Domer" type="Sprite2D" parent="." unique_id=1471587760]
+position = Vector2(2808, -1797)
+texture = ExtResource("15_fnxl5")
+
+[node name="GoodJob" type="Sprite2D" parent="." unique_id=1100836988]
+position = Vector2(3524, -1932)
+texture = ExtResource("10_w7e3s")
 
 [node name="Goal" type="Area2D" parent="." unique_id=1286452650]
 position = Vector2(9390, -1918)
